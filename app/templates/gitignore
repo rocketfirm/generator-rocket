@@ -1,0 +1,13 @@
+node_modules
+dist
+public/images
+public/styles
+public/scripts
+.tmp
+.sass-cache
+frontend/bower_components
+test/bower_components
+
+.idea
+.DS_STORE
+/vendor
