@@ -1,4 +1,4 @@
-# generator-rocket [![Build Status](https://secure.travis-ci.org/neilhem/generator-rocket.png?branch=master)](https://travis-ci.org/neilhem/generator-rocket)
+# generator-rocket [![Build Status](https://secure.travis-ci.org/rocketfirm/generator-rocket.png?branch=master)](https://travis-ci.org/rocketfirm/generator-rocket)
 
 > [Yeoman](http://yeoman.io) generator
 
