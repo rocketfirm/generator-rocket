@@ -1,9 +1,9 @@
 node_modules
 dist
-.tmp
-.sass-cache
-frontend/bower_components
-test/bower_components
+.tmp<% if (includeSass) { %>
+.sass-cache<% } %>
+bower_components
+
 .idea
 .DS_STORE
 /vendor
