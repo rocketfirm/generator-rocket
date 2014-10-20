@@ -18,6 +18,7 @@ module.exports = function(grunt) {
 
   // Configurable paths
   var config = {
+    tmp: '.tmp',
     app: 'app',
     dist: 'dist'
   };
@@ -70,8 +71,8 @@ module.exports = function(grunt) {
         },
         files: [
           '<%%= config.app %>/{,*/}*.html',
-          '.tmp/styles/{,*/}*.css',<% if (coffee) { %>
-          '.tmp/scripts/{,*/}*.js',<% } %>
+          '<%%= config.tmp %>/styles/{,*/}*.css',<% if (coffee) { %>
+          '<%%= config.tmp %>/scripts/{,*/}*.js',<% } %>
           '<%%= config.app %>/images/{,*/}*'
         ]
       }
@@ -90,7 +91,7 @@ module.exports = function(grunt) {
         options: {
           middleware: function(connect) {
             return [
-              connect.static('.tmp'),
+              connect.static('<%%= config.tmp %>'),
               connect().use('/bower_components', connect.static('./bower_components')),
               connect.static(config.app)
             ];
@@ -103,7 +104,7 @@ module.exports = function(grunt) {
           port: 9001,
           middleware: function(connect) {
             return [
-              connect.static('.tmp'),
+              connect.static('<%%= config.tmp %>'),
               connect.static('test'),
               connect().use('/bower_components', connect.static('./bower_components')),
               connect.static(config.app)
@@ -125,13 +126,13 @@ module.exports = function(grunt) {
         files: [{
           dot: true,
           src: [
-            '.tmp',
+            '<%%= config.tmp %>',
             '<%%= config.dist %>/*',
             '!<%%= config.dist %>/.git*'
           ]
         }]
       },
-      server: '.tmp'
+      server: '<%%= config.tmp %>'
     },
 
     // Make sure code styles are up to par and there are no obvious mistakes
@@ -202,7 +203,7 @@ module.exports = function(grunt) {
           expand: true,
           cwd: '<%%= config.app %>/styles',
           src: ['*.{scss,sass}'],
-          dest: '.tmp/styles',
+          dest: '<%%= config.tmp %>/styles',
           ext: '.css'
         }]
       },
@@ -211,7 +212,7 @@ module.exports = function(grunt) {
           expand: true,
           cwd: '<%%= config.app %>/styles',
           src: ['*.{scss,sass}'],
-          dest: '.tmp/styles',
+          dest: '<%%= config.tmp %>/styles',
           ext: '.css'
         }]
       }
@@ -225,9 +226,9 @@ module.exports = function(grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '.tmp/styles/',
+          cwd: '<%%= config.tmp %>/styles/',
           src: '{,*/}*.css',
-          dest: '.tmp/styles/'
+          dest: '<%%= config.tmp %>/styles/'
         }]
       }
     },
@@ -392,7 +393,7 @@ module.exports = function(grunt) {
         expand: true,
         dot: true,
         cwd: '<%%= config.app %>/styles',
-        dest: '.tmp/styles/',
+        dest: '<%%= config.tmp %>/styles/',
         src: '{,*/}*.css'
       }
     },<% if (includeModernizr) { %>
