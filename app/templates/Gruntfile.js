@@ -196,6 +196,7 @@ module.exports = function(grunt) {
         sourceMap: true,
         includePaths: ['bower_components']
         <% } else { %>
+        bundleExec: true,
         loadPath: 'bower_components'
       <% } %>},
       dist: {
