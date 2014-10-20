@@ -175,7 +175,7 @@ module.exports = function(grunt) {
           expand: true,
           cwd: '<%%= config.app %>/scripts',
           src: '{,*/}*.{coffee,litcoffee,coffee.md}',
-          dest: '.tmp/scripts',
+          dest: '<%%= config.tmp %>/scripts',
           ext: '.js'
         }]
       },
@@ -184,7 +184,7 @@ module.exports = function(grunt) {
           expand: true,
           cwd: 'test/spec',
           src: '{,*/}*.{coffee,litcoffee,coffee.md}',
-          dest: '.tmp/spec',
+          dest: '<%%= config.tmp %>/spec',
           ext: '.js'
         }]
       }
@@ -337,7 +337,7 @@ module.exports = function(grunt) {
     //   dist: {
     //     files: {
     //       '<%%= config.dist %>/styles/main.css': [
-    //         '.tmp/styles/{,*/}*.css',
+    //         '<%%= config.tmp %>/styles/{,*/}*.css',
     //         '<%%= config.app %>/styles/{,*/}*.css'
     //       ]
     //     }
