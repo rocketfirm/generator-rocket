@@ -8,7 +8,9 @@
 // If you want to recursively match all subfolders, use:
 // 'test/spec/**/*.js'
 
-module.exports = function(grunt) {
+module.exports = function(grunt) {<% if (includeHandlebars) { %>
+
+  grunt.loadNpmTasks('assemble');<% } %>
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
@@ -30,7 +32,11 @@ module.exports = function(grunt) {
     config: config,
 
     // Watches files for changes and runs tasks based on the changed files
-    watch: {
+    watch: {<% if (includeHandlebars) { %>
+      assemble: {
+        files: ['<%= config.app %>/**/*.hbs'],
+        tasks: ['newer:assemble:server']
+      },<% } %>
       bower: {
         files: ['bower.json'],
         tasks: ['wiredep']
@@ -69,8 +75,9 @@ module.exports = function(grunt) {
         options: {
           livereload: '<%%= connect.options.livereload %>'
         },
-        files: [
-          '<%%= config.app %>/{,*/}*.html',
+        files: [<% if (includeHandlebars) { %>
+          '<%%= config.tmp %>/{,*/}*.html',<% } else { %>
+          '<%%= config.app %>/{,*/}*.html',<% } %>
           '<%%= config.tmp %>/styles/{,*/}*.css',<% if (coffee) { %>
           '<%%= config.tmp %>/scripts/{,*/}*.js',<% } %>
           '<%%= config.app %>/images/{,*/}*'
@@ -434,9 +441,25 @@ module.exports = function(grunt) {
         'imagemin',
         'svgmin'
       ]
-    }
-  });
+    }<% if (includeHandlebars) { %>,
 
+    // Compile Handlebars files into html
+    assemble: {
+      options: {
+        flatten: true,
+        partials: ['<%%= config.app %>/includes/**/*.hbs'],
+        layout: ['<%%= config.app %>/layouts/default.hbs']
+      },
+      server: {
+        src: ['<%%= config.app %>/*.hbs'],
+        dest: '<%%= config.tmp %>/'
+      },
+      dist: {
+        src: ['<%%= config.app %>/*.hbs'],
+        dest: '<%%= config.tmp %>/'
+      }
+    }<% } %>
+  });
 
   grunt.registerTask('serve', 'start the server and preview your app, --allow-remote for remote access', function(target) {
     if (grunt.option('allow-remote')) {
@@ -448,7 +471,8 @@ module.exports = function(grunt) {
 
     grunt.task.run([
       'clean:server',
-      'wiredep',
+      'wiredep',<% if (includeHandlebars) {  %>
+      'assemble:server',<% } %>
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -479,7 +503,8 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'wiredep',
+    'wiredep',<% if (includeHandlebars) {  %>
+    'assemble:dist',<% } %>
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',

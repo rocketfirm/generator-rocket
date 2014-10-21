@@ -27,7 +27,7 @@ describe('Rocket generator', function() {
       'Gruntfile.js',
       'app/favicon.ico',
       'app/robots.txt',
-      'app/index.html'
+      'app/index.' + (this.includeHandlebars ? 'hbs' : 'html')
     ];
 
     var options = {
@@ -63,19 +63,19 @@ describe('Rocket generator', function() {
         assert.noFileContent([
           ['Gruntfile.js', /coffee/],
           ['Gruntfile.js', /modernizr/],
-          ['app/index.html', /modernizr/],
+          ['app/index.' + (this.includeHandlebars ? 'hbs' : 'html'), /modernizr/],
           ['bower.json', /modernizr/],
           ['package.json', /modernizr/],
           ['Gruntfile.js', /bootstrap/],
-          ['app/index.html', /bootstrap/],
+          ['app/index.' + (this.includeHandlebars ? 'hbs' : 'html'), /bootstrap/],
           ['bower.json', /bootstrap/],
           ['Gruntfile.js', /sass/],
-          ['app/index.html', /Sass/],
+          ['app/index.' + (this.includeHandlebars ? 'hbs' : 'html'), /Sass/],
           ['.gitignore', /\.sass-cache/],
           ['package.json', /grunt-contrib-sass/],
           ['package.json', /grunt-sass/],
           ['Gruntfile.js', /bootstrap-sass-official/],
-          ['app/index.html', /Sass is a mature/],
+          ['app/index.' + (this.includeHandlebars ? 'hbs' : 'html'), /Sass is a mature/],
           ['bower.json', /bootstrap-sass-official/]
         ]);
         done();
@@ -108,7 +108,7 @@ describe('Rocket generator', function() {
 
         assert.fileContent([
           ['Gruntfile.js', /modernizr/],
-          ['app/index.html', /modernizr/],
+          ['app/index.' + (this.includeHandlebars ? 'hbs' : 'html'), /modernizr/],
           ['bower.json', /modernizr/],
           ['package.json', /modernizr/],
         ]);
@@ -123,7 +123,7 @@ describe('Rocket generator', function() {
 
         assert.fileContent([
           ['Gruntfile.js', /bootstrap/],
-          ['app/index.html', /bootstrap/],
+          ['app/index.' + (this.includeHandlebars ? 'hbs' : 'html'), /bootstrap/],
           ['bower.json', /bootstrap/]
         ]);
 
@@ -137,14 +137,14 @@ describe('Rocket generator', function() {
 
         assert.fileContent([
           ['Gruntfile.js', /sass/],
-          ['app/index.html', /Sass/],
+          ['app/index.' + (this.includeHandlebars ? 'hbs' : 'html'), /Sass/],
           ['.gitignore', /\.sass-cache/],
           ['package.json', /grunt-contrib-sass/]
         ]);
 
         assert.noFileContent([
           ['package.json', /grunt-sass/],
-          ['app/index.html', /Sass is a mature/]
+          ['app/index.' + (this.includeHandlebars ? 'hbs' : 'html'), /Sass is a mature/]
         ]);
 
         done();
@@ -177,7 +177,7 @@ describe('Rocket generator', function() {
 
         assert.fileContent([
           ['Gruntfile.js', /bootstrap-sass-official/],
-          ['app/index.html', /Sass is a mature/],
+          ['app/index.' + (this.includeHandlebars ? 'hbs' : 'html'), /Sass is a mature/],
           ['bower.json', /bootstrap-sass-official/]
         ]);
 

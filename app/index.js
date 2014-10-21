@@ -54,6 +54,14 @@ module.exports = yeoman.generators.Base.extend({
         name: 'Modernizr',
         value: 'includeModernizr',
         checked: false
+      },{
+        name: 'Handlebars',
+        value: 'includeHandlebars',
+        checked: false
+      },{
+        name: 'Capistrano',
+        value: 'includeCapistrano',
+        checked: false
       }]
     }, {
       when: function(answers) {
@@ -78,6 +86,8 @@ module.exports = yeoman.generators.Base.extend({
       this.includeSass = hasFeature('includeSass');
       this.includeBootstrap = hasFeature('includeBootstrap');
       this.includeModernizr = hasFeature('includeModernizr');
+      this.includeCapistrano = hasFeature('includeCapistrano');
+      this.includeHandlebars = hasFeature('includeHandlebars');
 
       this.includeLibSass = answers.libsass;
       this.includeRubySass = !answers.libsass;
@@ -134,9 +144,21 @@ module.exports = yeoman.generators.Base.extend({
     this.template(css, 'app/styles/' + css);
   },
 
+  gemfile: function() {
+    if (this.includeRubySass) {
+      var gemfile = 'source "https://rubygems.org"\n' +
+        'require \'rbconfig\'\n' +
+        'gem \'wdm\', \'~> 0.1.0\' if RbConfig::CONFIG[\'target_os\'] =~ /mswin|mingw/i\n' +
+        (this.includeCapistrano ? 'gem \'capistrano\', \'~> 3.1.0\'\n' : '') +
+        'gem \'sass\', \'~> 3.4.5\'\n';
+
+      this.write('Gemfile', gemfile);
+    }
+  },
+
   writeIndex: function() {
     this.indexFile = this.engine(
-      this.readFileAsString(join(this.sourceRoot(), 'index.html')),
+      this.readFileAsString(join(this.sourceRoot(), (this.includeHandlebars ? 'index.hbs' : 'index.html'))),
       this
     );
 
@@ -180,15 +202,14 @@ module.exports = yeoman.generators.Base.extend({
     this.mkdir('app/scripts');
     this.mkdir('app/styles');
     this.mkdir('app/images');
-    this.write('app/index.html', this.indexFile);
+    this.write('app/index.' + (this.includeHandlebars ? 'hbs' : 'html'), this.indexFile);
 
     if (this.coffee) {
       this.write(
         'app/scripts/main.coffee',
         'console.log "\'Allo from CoffeeScript!"'
       );
-    }
-    else {
+    } else {
       this.write('app/scripts/main.js', 'console.log(\'\\\'Allo \\\'Allo!\');');
     }
   },
@@ -201,6 +222,12 @@ module.exports = yeoman.generators.Base.extend({
           'skip-install': this.options['skip-install'],
           'coffee': this.options.coffee
         }
+      });
+
+      this.installDependencies({
+        callback: function() {
+          this.spawnCommand('bundle', ['install']);
+        }.bind(this)
       });
 
       if (!this.options['skip-install']) {
