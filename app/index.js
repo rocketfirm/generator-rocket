@@ -145,12 +145,12 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   gemfile: function() {
-    if (this.includeRubySass) {
+    if (this.includeSass || this.includeCapistrano) {
       var gemfile = 'source "https://rubygems.org"\n' +
         'require \'rbconfig\'\n' +
         'gem \'wdm\', \'~> 0.1.0\' if RbConfig::CONFIG[\'target_os\'] =~ /mswin|mingw/i\n' +
         (this.includeCapistrano ? 'gem \'capistrano\', \'~> 3.1.0\'\n' : '') +
-        'gem \'sass\', \'~> 3.4.5\'\n';
+        (this.includeRubySass ? 'gem \'sass\', \'~> 3.4.5\'\n' : '');
 
       this.write('Gemfile', gemfile);
     }
@@ -215,6 +215,7 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   install: function() {
+    var that = this;
     this.on('end', function() {
       this.invoke(this.options['test-framework'], {
         options: {
@@ -224,16 +225,19 @@ module.exports = yeoman.generators.Base.extend({
         }
       });
 
-      this.installDependencies({
-        callback: function() {
-          this.spawnCommand('bundle', ['install']);
-        }.bind(this)
-      });
-
       if (!this.options['skip-install']) {
         this.installDependencies({
           skipMessage: this.options['skip-install-message'],
-          skipInstall: this.options['skip-install']
+          skipInstall: this.options['skip-install'],
+          callback: function() {
+            if (that.includeSass || that.includeCapistrano) {
+              that.spawnCommand('bundle', ['install']);
+            }
+
+            if (that.includeCapistrano) {
+              that.spawnCommand('cap', ['install']);
+            }
+          }
         });
       }
     });
