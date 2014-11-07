@@ -119,6 +119,7 @@ module.exports = yeoman.generators.Base.extend({
     if (this.includeBootstrap) {
       var bs = 'bootstrap' + (this.includeSass ? '-sass-official' : '');
       bower.dependencies[bs] = "~3.2.0";
+      bower.dependencies.jquery = "~1.11.1";
     } else {
       bower.dependencies.jquery = "~1.11.1";
     }
@@ -158,7 +159,7 @@ module.exports = yeoman.generators.Base.extend({
 
   writeIndex: function() {
     this.indexFile = this.engine(
-      this.readFileAsString(join(this.sourceRoot(), (this.includeHandlebars ? 'index.hbs' : 'index.html'))),
+      this.readFileAsString(join(this.sourceRoot(), (this.includeHandlebars ? 'default.hbs' : 'index.html'))),
       this
     );
 
@@ -202,7 +203,11 @@ module.exports = yeoman.generators.Base.extend({
     this.mkdir('app/scripts');
     this.mkdir('app/styles');
     this.mkdir('app/images');
-    this.write('app/index.' + (this.includeHandlebars ? 'hbs' : 'html'), this.indexFile);
+    this.write((this.includeHandlebars ? 'app/layouts/default.hbs' : 'app/index.html'), this.indexFile);
+
+    if (this.includeHandlebars) {
+      this.copy('index.hbs', 'app/index.hbs');
+    }
 
     if (this.coffee) {
       this.write(

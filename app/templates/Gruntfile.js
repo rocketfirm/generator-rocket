@@ -276,8 +276,9 @@ module.exports = function(grunt) {<% if (includeHandlebars) { %>
     useminPrepare: {
       options: {
         dest: '<%%= config.dist %>'
-      },
-      html: '<%%= config.app %>/index.html'
+      },<% if (includeHandlebars) {  %>
+      html: '<%%= config.app %>/layouts/default.hbs'<% } else { %>
+      html: '<%%= config.app %>/index.html'<% } %>
     },
 
     // Performs rewrites based on rev and the useminPrepare configuration
@@ -395,6 +396,12 @@ module.exports = function(grunt) {<% if (includeHandlebars) { %>
               %>fonts/*<%
             } %>',
           dest: '<%%= config.dist %>'
+        }<% } %><% if (includeHandlebars) {  %>, {
+          expand: true,
+          dot: true,
+          cwd: '<%= config.tmp %>',
+          src: ['{,*/}*.html'],
+          dest: '<%= config.dist %>'
         }<% } %>]
       },
       styles: {
