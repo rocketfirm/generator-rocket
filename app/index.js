@@ -151,7 +151,7 @@ module.exports = yeoman.generators.Base.extend({
         'require \'rbconfig\'\n' +
         'gem \'wdm\', \'~> 0.1.0\' if RbConfig::CONFIG[\'target_os\'] =~ /mswin|mingw/i\n' +
         (this.includeCapistrano ? 'gem \'capistrano\', \'~> 3.1.0\'\n' : '') +
-        (this.includeRubySass ? 'gem \'sass\', \'~> 3.4.5\'\n' : '');
+        (this.includeRubySass ? 'gem \'sass\', \'~> 3.4.7\'\n' : '');
 
       this.write('Gemfile', gemfile);
     }
