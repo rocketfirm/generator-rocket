@@ -34,7 +34,7 @@ module.exports = function(grunt) {<% if (includeHandlebars) { %>
     // Watches files for changes and runs tasks based on the changed files
     watch: {<% if (includeHandlebars) { %>
       assemble: {
-        files: ['<%%= config.app %>/**/*.hbs'],
+        files: ['<%%= config.app %>/{,*/}*.hbs'],
         tasks: ['newer:assemble:server']
       },<% } %>
       bower: {
