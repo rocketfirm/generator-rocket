@@ -1,0 +1,11 @@
+bundle_exec = true
+sass_dir = "app/styles"
+css_dir = "dist/.tmp/styles"
+generated_images_dir = "dist/.tmp/images/generated"
+generated_images_path = "dist/.tmp/images/generated"
+images_dir = "app/images"
+fonts_dir = "app/styles/fonts"
+http_images_path = "/images"
+http_generated_images_path = "../images/generated"
+http_fonts_path = "fonts"
+relative_assets = false

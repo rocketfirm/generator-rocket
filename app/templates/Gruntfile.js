@@ -202,7 +202,8 @@ module.exports = function(grunt) {<% if (includeHandlebars) { %>
       options: {<% if (includeLibSass) { %>
         sourceMap: true,
         includePaths: ['bower_components']
-        <% } else { %>
+        <% } else { %><% if (includeCompass) { %>
+        compass: true,<% } %>
         bundleExec: true,
         loadPath: 'bower_components'
       <% } %>},

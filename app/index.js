@@ -74,6 +74,16 @@ module.exports = yeoman.generators.Base.extend({
       message: 'Would you like to use libsass? Read up more at \n' +
         chalk.green('https://github.com/andrew/node-sass#node-sass'),
       default: false
+    }, {
+      when: function(answers) {
+        return answers && answers.features &&
+          answers.features.indexOf('includeSass') !== -1;
+      },
+      type: 'confirm',
+      name: 'compass',
+      value: 'includeCompass',
+      message: 'Would you like to use Compass',
+      default: false
     }];
 
     this.prompt(prompts, function(answers) {
@@ -90,6 +100,7 @@ module.exports = yeoman.generators.Base.extend({
       this.includeHandlebars = hasFeature('includeHandlebars');
 
       this.includeLibSass = answers.libsass;
+      this.includeCompass = answers.compass;
       this.includeRubySass = !answers.libsass;
 
       done();
@@ -209,6 +220,10 @@ module.exports = yeoman.generators.Base.extend({
 
     if (this.includeHandlebars) {
       this.copy('index.hbs', 'app/index.hbs');
+    }
+
+    if (this.includeCompass) {
+      this.copy('config.rb', 'app/config.rb');
     }
 
     if (this.coffee) {
