@@ -244,8 +244,9 @@ module.exports = function(grunt) {<% if (includeHandlebars) { %>
     // Automatically inject Bower components into the HTML file
     wiredep: {
       app: {
-        ignorePath: /^<%= config.app %>\/|\.\.\//,
-        src: ['<%%= config.app %>/index.html']<% if (includeBootstrap) { %>,<% if (includeSass) { %>
+        ignorePath: /^<%= config.app %>\/|\.\.\//,<% if (includeHandlebars) { %>
+        src: ['<%%= config.app %>/layouts/default.hbs']<% } else { %>
+        src: ['<%%= config.app %>/index.html']<% } %><% if (includeBootstrap) { %>,<% if (includeSass) { %>
         exclude: ['bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js']<% } else { %>
         exclude: ['bower_components/bootstrap/dist/js/bootstrap.js']<% } } %>
       }<% if (includeSass) { %>,
