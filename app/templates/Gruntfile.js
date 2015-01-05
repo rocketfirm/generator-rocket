@@ -400,9 +400,9 @@ module.exports = function(grunt) {<% if (includeHandlebars) { %>
         }<% } %><% if (includeHandlebars) {  %>, {
           expand: true,
           dot: true,
-          cwd: '<%= config.tmp %>',
+          cwd: '<%%= config.tmp %>',
           src: ['{,*/}*.html'],
-          dest: '<%= config.dist %>'
+          dest: '<%%= config.dist %>'
         }<% } %>]
       },
       styles: {
