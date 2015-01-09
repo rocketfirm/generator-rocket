@@ -129,10 +129,10 @@ module.exports = yeoman.generators.Base.extend({
 
     if (this.includeBootstrap) {
       var bs = 'bootstrap' + (this.includeSass ? '-sass-official' : '');
-      bower.dependencies[bs] = "~3.3.0";
-      bower.dependencies.jquery = "~1.11.1";
+      bower.dependencies[bs] = "~3.3.1";
+      bower.dependencies.jquery = "~1.11.2";
     } else {
-      bower.dependencies.jquery = "~1.11.1";
+      bower.dependencies.jquery = "~1.11.2";
     }
 
     if (this.includeModernizr) {
@@ -163,9 +163,9 @@ module.exports = yeoman.generators.Base.extend({
       var gemfile = 'source "https://rubygems.org"\n' +
         'require \'rbconfig\'\n' +
         'gem \'wdm\', \'~> 0.1.0\' if RbConfig::CONFIG[\'target_os\'] =~ /mswin|mingw/i\n' +
-        (this.includeCapistrano ? 'gem \'capistrano\', \'~> 3.1.0\'\n' : '') +
+        (this.includeCapistrano ? 'gem \'capistrano\', \'~> 3.3.5\'\n' : '') +
         (this.includeCompass ? 'gem \'compass\', \'~> 1.0.1\'\n' : '') +
-        (this.includeRubySass ? 'gem \'sass\', \'~> 3.4.7\'\n' : '');
+        (this.includeRubySass ? 'gem \'sass\', \'~> 3.4.9\'\n' : '');
 
       this.write('Gemfile', gemfile);
     }
