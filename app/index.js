@@ -224,7 +224,7 @@ module.exports = yeoman.generators.Base.extend({
     }
 
     if (this.includeCompass) {
-      this.copy('config.rb', 'app/config.rb');
+      this.copy('config.rb', 'config.rb');
     }
 
     if (this.coffee) {
