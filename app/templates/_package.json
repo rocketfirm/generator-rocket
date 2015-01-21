@@ -21,7 +21,7 @@
     "grunt-contrib-watch": "~0.6.1",<% if (testFramework === 'mocha') { %>
     "grunt-mocha": "~0.4.11",<% } %><% if (includeModernizr) { %>
     "grunt-modernizr": "~0.6.0",<% } %>
-    "grunt-newer": "~0.8.0",
+    "grunt-newer": "~1.1.0",
     "grunt-rev": "~0.1.0",<% if (includeSass && includeLibSass) { %>
     "grunt-sass": "~0.17.0",<% } %>
     "grunt-svgmin": "~2.0.0",
