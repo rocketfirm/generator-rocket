@@ -35,7 +35,7 @@ module.exports = function(grunt) {<% if (includeHandlebars) { %>
     watch: {<% if (includeHandlebars) { %>
       assemble: {
         files: ['<%%= config.app %>/{,*/}*.hbs'],
-        tasks: ['newer:assemble:server']
+        tasks: ['assemble:server']
       },<% } %>
       bower: {
         files: ['bower.json'],
