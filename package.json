@@ -1,6 +1,6 @@
 {
   "name": "generator-rocket",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Scaffold out a front-end web app",
   "license": "BSD",
   "repository": "rocketfirm/generator-rocket",
