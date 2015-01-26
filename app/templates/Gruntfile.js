@@ -249,8 +249,14 @@ module.exports = function(grunt) {<% if (includeHandlebars) { %>
         src: ['<%%= config.app %>/layouts/default.hbs']<% } else { %>
         ignorePath: /^<%= config.app %>\/|\.\.\//,
         src: ['<%%= config.app %>/index.html']<% } %><% if (includeBootstrap) { %>,<% if (includeSass) { %>
-        exclude: ['bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js']<% } else { %>
-        exclude: ['bower_components/bootstrap/dist/js/bootstrap.js']<% } } %>
+        exclude: [
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js',
+          'bower_components/respond/dest/respond.src.js'
+        ]<% } else { %>
+        exclude: [
+          'bower_components/bootstrap/dist/js/bootstrap.js',
+          'bower_components/respond/dest/respond.src.js'
+        ]<% } } %>
       }<% if (includeSass) { %>,
       sass: {
         src: ['<%%= config.app %>/styles/{,*/}*.{scss,sass}'],
