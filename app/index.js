@@ -58,10 +58,6 @@ module.exports = yeoman.generators.Base.extend({
         name: 'Handlebars',
         value: 'includeHandlebars',
         checked: false
-      },{
-        name: 'Capistrano',
-        value: 'includeCapistrano',
-        checked: false
       }]
     }, {
       when: function(answers) {
@@ -69,20 +65,10 @@ module.exports = yeoman.generators.Base.extend({
           answers.features.indexOf('includeSass') !== -1;
       },
       type: 'confirm',
-      name: 'libsass',
-      value: 'includeLibSass',
-      message: 'Would you like to use libsass? Read up more at \n' +
-        chalk.green('https://github.com/andrew/node-sass#node-sass'),
-      default: false
-    }, {
-      when: function(answers) {
-        return answers && answers.features &&
-          answers.features.indexOf('includeSass') !== -1;
-      },
-      type: 'confirm',
-      name: 'compass',
-      value: 'includeCompass',
-      message: 'Would you like to use Compass',
+      name: 'sprites',
+      value: 'includeSprites',
+      message: 'Would you like to use grunt-spritesmith for spriting? Read up more at \n' +
+        chalk.green('https://github.com/Ensighten/grunt-spritesmith'),
       default: false
     }];
 
@@ -96,12 +82,9 @@ module.exports = yeoman.generators.Base.extend({
       this.includeSass = hasFeature('includeSass');
       this.includeBootstrap = hasFeature('includeBootstrap');
       this.includeModernizr = hasFeature('includeModernizr');
-      this.includeCapistrano = hasFeature('includeCapistrano');
       this.includeHandlebars = hasFeature('includeHandlebars');
 
-      this.includeLibSass = answers.libsass;
-      this.includeCompass = answers.compass;
-      this.includeRubySass = !answers.libsass;
+      this.includeSprites = answers.sprites;
 
       done();
     }.bind(this));
@@ -158,19 +141,6 @@ module.exports = yeoman.generators.Base.extend({
     this.template(css, 'app/styles/' + css);
   },
 
-  gemfile: function() {
-    if (this.includeSass || this.includeCapistrano) {
-      var gemfile = 'source "https://rubygems.org"\n' +
-        'require \'rbconfig\'\n' +
-        'gem \'wdm\', \'~> 0.1.0\' if RbConfig::CONFIG[\'target_os\'] =~ /mswin|mingw/i\n' +
-        (this.includeCapistrano ? 'gem \'capistrano\', \'~> 3.3.5\'\n' : '') +
-        (this.includeCompass ? 'gem \'compass\', \'~> 1.0.3\'\n' : '') +
-        (this.includeRubySass ? 'gem \'sass\', \'~> 3.4.9\'\n' : '');
-
-      this.write('Gemfile', gemfile);
-    }
-  },
-
   writeIndex: function() {
     this.indexFile = this.engine(
       this.readFileAsString(join(this.sourceRoot(), (this.includeHandlebars ? 'default.hbs' : 'index.html'))),
@@ -223,8 +193,8 @@ module.exports = yeoman.generators.Base.extend({
       this.copy('index.hbs', 'app/index.hbs');
     }
 
-    if (this.includeCompass) {
-      this.copy('config.rb', 'config.rb');
+    if (this.includeSprites) {
+      this.copy('fork.png', 'app/images/icons/fork.png');
     }
 
     if (this.coffee) {
@@ -248,16 +218,7 @@ module.exports = yeoman.generators.Base.extend({
       if (!this.options['skip-install']) {
         this.installDependencies({
           skipMessage: this.options['skip-install-message'],
-          skipInstall: this.options['skip-install'],
-          callback: function() {
-            if (that.includeSass || that.includeCapistrano) {
-              that.spawnCommand('bundle', ['install']);
-            }
-
-            if (that.includeCapistrano) {
-              that.spawnCommand('cap', ['install']);
-            }
-          }
+          skipInstall: this.options['skip-install']
         });
       }
     });

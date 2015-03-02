@@ -199,12 +199,9 @@ module.exports = function(grunt) {<% if (includeHandlebars) { %>
 
     // Compiles Sass to CSS and generates necessary files if requested
     sass: {
-      options: {<% if (includeLibSass) { %>
+      options: {
         sourceMap: true,
-        includePaths: ['bower_components']<% } else { %><% if (includeCompass) { %>
-        compass: true,<% } %>
-        bundleExec: true,
-        loadPath: 'bower_components'<% } %>
+        includePaths: ['bower_components']
       },
       dist: {
         files: [{
@@ -473,6 +470,27 @@ module.exports = function(grunt) {<% if (includeHandlebars) { %>
         src: ['<%%= config.app %>/*.hbs'],
         dest: '<%%= config.tmp %>/'
       }
+    },<% } %><% if (includeSprites) { %>
+
+    // Create css sprites
+    sprite: {
+      server: {
+        src: '<%%= config.app %>/images/icons/*.png',
+        dest: '<%%= config.tmp %>/images/generated/sprites.png',
+        destCss: '<%%= config.tmp %>/styles/_sprites.scss',
+        cssVarMap: function(sprite) {
+          sprite.name = 'icon-' + sprite.name;
+        }
+      },
+      dist: {
+        src: '<%%= config.app %>/images/icons/*.png',
+        dest: '<%%= config.dist %>/images/generated/sprites.png',
+        destCss: '<%%= config.tmp %>/styles/sprites.scss',
+        imgPath: '../images/generated/sprites.png',
+        cssVarMap: function(sprite) {
+          sprite.name = 'icon-' + sprite.name;
+        }
+      }
     }<% } %>
   });
 
@@ -485,7 +503,8 @@ module.exports = function(grunt) {<% if (includeHandlebars) { %>
     }
 
     grunt.task.run([
-      'clean:server',
+      'clean:server',<% if (includeSprites) {  %>
+      'sprite:dist',<% } %>
       'wiredep',<% if (includeHandlebars) {  %>
       'assemble:server',<% } %>
       'concurrent:server',
@@ -513,7 +532,8 @@ module.exports = function(grunt) {<% if (includeHandlebars) { %>
 
   grunt.registerTask('build', [
     'clean:dist',
-    'wiredep',<% if (includeHandlebars) {  %>
+    'wiredep',<% if (includeSprites) {  %>
+    'sprite:dist',<% } %><% if (includeHandlebars) {  %>
     'assemble:dist',<% } %>
     'useminPrepare',
     'concurrent:dist',
