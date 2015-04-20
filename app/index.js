@@ -205,7 +205,6 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   install: function() {
-    var that = this;
     this.on('end', function() {
       this.invoke(this.options['test-framework'], {
         options: {
