@@ -67,7 +67,11 @@ module.exports = function(grunt) {<% if (includeHandlebars) { %>
       styles: {
         files: ['<%%= config.app %>/styles/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'autoprefixer']
-      }
+      }<% if (includeSprites) { %>,
+      icons: {
+        files: ['<%= config.app %>/images/icons/{,*/}*.png'],
+        tasks: ['sprite:server', 'sass:server']
+      }<% } %>
     },
 
     // The actual grunt server settings
@@ -189,7 +193,7 @@ module.exports = function(grunt) {<% if (includeHandlebars) { %>
     sass: {
       options: {
         sourceMap: true,
-        includePaths: ['bower_components'],
+        includePaths: ['bower_components'<% if (includeSprites) { %>,'<%= config.tmp %>/styles'<% } %>],
         imagePath: '../images'
       },
       dist: {

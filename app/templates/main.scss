@@ -89,7 +89,8 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
-}<% } else { %>// bower:scss
+}<% } else { %>
+// bower:scss
 // endbower
 
 body {
@@ -119,4 +120,16 @@ body {
   background: #ccc;
   color: #000;
   padding: 0.2em 0;
-}<% } %>
+}<% } %><% if (includeSass && includeSprites) { %>
+
+@import "sprites";
+
+.icon {
+  display: inline-block;
+  background-repeat: no-repeat;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+@include sprites($spritesheet-sprites);
+<% } %>
