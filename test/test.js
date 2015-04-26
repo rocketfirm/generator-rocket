@@ -109,7 +109,7 @@ describe('Rocket generator', function() {
           ['Gruntfile.js', /modernizr/],
           ['app/index.' + (this.includeHandlebars ? 'hbs' : 'html'), /modernizr/],
           ['bower.json', /modernizr/],
-          ['package.json', /modernizr/],
+          ['package.json', /modernizr/]
         ]);
 
         done();
