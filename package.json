@@ -29,11 +29,9 @@
     "yosay": "^1.0.3"
   },
   "devDependencies": {
+    "generator-mocha": ">=0.1.7",
     "mocha": "*",
     "underscore": "^1.8.3",
     "underscore.string": "^3.0.3"
-  },
-  "peerDependencies": {
-    "generator-mocha": ">=0.1.7"
   }
 }
