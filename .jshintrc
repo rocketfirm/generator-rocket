@@ -1,16 +1,17 @@
 {
-  "node": true,
-  "esnext": true,
-  "bitwise": false,
-  "curly": false,
+  "bitwise": true,
+  "camelcase": true,
+  "curly": true,
   "eqeqeq": true,
-  "eqnull": true,
+  "esnext": true,
   "immed": true,
   "latedef": true,
+  "mocha" : true,
   "newcap": true,
   "noarg": true,
+  "node": true,
+  "quotmark": "single",
+  "strict": true,
   "undef": true,
-  "strict": false,
-  "trailing": true,
-  "smarttabs": true
+  "unused": true
 }

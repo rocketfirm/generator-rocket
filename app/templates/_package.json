@@ -1,5 +1,5 @@
 {
-  "name": "<%= _.slugify(appname) %>",
+  "private": true,
   "devDependencies": {
     "apache-server-configs": "~2.7.1",<% if (includeHandlebars) { %>
     "assemble": "~0.4.42",<% } %>
