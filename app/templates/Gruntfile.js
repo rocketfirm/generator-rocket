@@ -84,6 +84,7 @@ module.exports = function(grunt) {<% if (includeHandlebars) { %>
             '<%%= config.app %>/images/{,*/}*',
             '<%%= config.app %>/scripts/{,*/}*.js'
           ],
+          port: 9000,
           server: {
             baseDir: ['<%%= config.tmp %>', config.app],
             routes: {
