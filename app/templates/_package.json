@@ -23,7 +23,7 @@
     "grunt-newer": "~1.1.0",
     "grunt-rev": "~0.1.0",<% if (includeSass) { %>
     "grunt-sass": "~0.18.0",<% } %><% if (includeSprites) { %>
-    "grunt-spritesmith": "~3.9.0",<% } %>
+    "grunt-spritesmith": "~4.5.3",<% } %>
     "grunt-svgmin": "~2.0.0",
     "grunt-usemin": "~3.0.0",
     "grunt-wiredep": "~2.0.0",
