@@ -193,7 +193,8 @@ module.exports = function(grunt) {<% if (includeHandlebars) { %>
     sass: {
       options: {
         sourceMap: true,
-        includePaths: ['bower_components'<% if (includeSprites) { %>,'<%= config.tmp %>/styles'<% } %>],
+        includePaths: ['bower_components'<% if (includeSprites) { %>
+          , '<%%= config.tmp %>/styles'<% } %>],
         imagePath: '../images'
       },
       dist: {
@@ -494,7 +495,7 @@ module.exports = function(grunt) {<% if (includeHandlebars) { %>
 
     grunt.task.run([
       'clean:server',<% if (includeSprites) {  %>
-      'sprite:dist',<% } %>
+      'sprite:server',<% } %>
       'wiredep',<% if (includeHandlebars) {  %>
       'assemble:server',<% } %>
       'concurrent:server',
