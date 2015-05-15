@@ -187,9 +187,10 @@ module.exports = yeoman.generators.Base.extend({
     this.mkdir('app/scripts');
     this.mkdir('app/styles');
     this.mkdir('app/images');
-    this.write((this.includeHandlebars ? 'app/layouts/default.hbs' : 'app/index.html'), this.indexFile);
+    this.write((this.includeHandlebars ? 'app/_layouts/default.hbs' : 'app/index.html'), this.indexFile);
 
     if (this.includeHandlebars) {
+      this.mkdir('app/_includes');
       this.copy('index.hbs', 'app/index.hbs');
     }
 

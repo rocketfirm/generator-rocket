@@ -453,8 +453,8 @@ module.exports = function(grunt) {<% if (includeHandlebars) { %>
     assemble: {
       options: {
         flatten: true,
-        partials: ['<%%= config.app %>/includes/**/*.hbs'],
-        layout: ['<%%= config.app %>/layouts/default.hbs']
+        partials: ['<%%= config.app %>/_includes/**/*.hbs'],
+        layout: ['<%%= config.app %>/_layouts/default.hbs']
       },
       server: {
         src: ['<%%= config.app %>/*.hbs'],
