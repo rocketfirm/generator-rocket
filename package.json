@@ -22,16 +22,18 @@
     "jquery",
     "grunt"
   ],
-  "dependencies": {
+   "dependencies": {
     "chalk": "^1.0.0",
-    "cheerio": "^0.19.0",
-    "yeoman-generator": "^0.19.2",
-    "yosay": "^1.0.3"
+    "cheerio": "^0.18.0",
+    "yeoman-generator": "^0.18.9",
+    "yosay": "^1.0.2"
   },
   "devDependencies": {
-    "generator-mocha": ">=0.1.7",
+    "grunt-cli": "^0.1.13",
     "mocha": "*",
-    "underscore": "^1.8.3",
-    "underscore.string": "^3.0.3"
+    "underscore": "^1.6.0"
+  },
+  "peerDependencies": {
+    "generator-mocha": ">=0.1.0"
   }
 }

@@ -3,7 +3,6 @@
 var join = require('path').join;
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
-var _s = require('underscore.string');
 
 module.exports = yeoman.generators.Base.extend({
   constructor: function() {
@@ -106,7 +105,7 @@ module.exports = yeoman.generators.Base.extend({
 
   bower: function() {
     var bower = {
-      name: _s.slugify(this.appname),
+      name: this._.slugify(this.appname),
       private: true,
       dependencies: {}
     };
