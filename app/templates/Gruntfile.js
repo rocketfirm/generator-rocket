@@ -217,8 +217,8 @@ module.exports = function(grunt) {<% if (includeHandlebars) { %>
       }
     },<% } %>
 
-    // Add vendor prefixed styles
-    autoprefixer: {
+    // Use tomorrow's CSS syntax, today
+    cssnext: {
       options: {
         browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1']
       },

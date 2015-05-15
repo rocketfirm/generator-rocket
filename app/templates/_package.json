@@ -4,7 +4,6 @@
     "apache-server-configs": "~2.7.1",<% if (includeHandlebars) { %>
     "assemble": "~0.4.42",<% } %>
     "grunt": "~0.4.5",
-    "grunt-autoprefixer": "~3.0.0",
     "grunt-concurrent": "~1.0.0",
     "grunt-browser-sync": "~2.1.1",
     "grunt-contrib-clean": "~0.6.0",<% if (coffee) { %>
@@ -17,7 +16,8 @@
     "grunt-contrib-jasmine": "~0.8.2",<% } %>
     "grunt-contrib-jshint": "~0.11.2",
     "grunt-contrib-uglify": "~0.9.1",
-    "grunt-contrib-watch": "~0.6.1",<% if (testFramework === 'mocha') { %>
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-cssnext": "~1.0.0",<% if (testFramework === 'mocha') { %>
     "grunt-mocha": "~0.4.11",<% } %><% if (includeModernizr) { %>
     "grunt-modernizr": "~0.6.0",<% } %>
     "grunt-newer": "~1.1.0",
