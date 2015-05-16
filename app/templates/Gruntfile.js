@@ -8,15 +8,16 @@
 // If you want to recursively match all subfolders, use:
 // 'test/spec/**/*.js'
 
-module.exports = function(grunt) {<% if (includeHandlebars) { %>
-
-  grunt.loadNpmTasks('assemble');<% } %>
+module.exports = function(grunt) {
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
   // Load grunt tasks automatically
-  require('load-grunt-tasks')(grunt);
+  require('jit-grunt')(grunt, {
+    useminPrepare: 'grunt-usemin'<% if (includeSprites) { %>,
+    sprite: 'grunt-spritesmith'<% } %>
+  });
 
   // Configurable paths
   var config = {
