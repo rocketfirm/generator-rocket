@@ -63,11 +63,11 @@ module.exports = function(grunt) {
       },<% if (includeSass) { %>
       sass: {
         files: ['<%%= config.app %>/styles/{,*/}*.{scss,sass}'],
-        tasks: ['sass:server', 'autoprefixer']
+        tasks: ['sass:server', 'cssnext']
       },<% } %>
       styles: {
         files: ['<%%= config.app %>/styles/{,*/}*.css'],
-        tasks: ['newer:copy:styles', 'autoprefixer']
+        tasks: ['newer:copy:styles', 'cssnext']
       }<% if (includeSprites) { %>,
       icons: {
         files: ['<%= config.app %>/images/icons/{,*/}*.png'],
@@ -500,7 +500,7 @@ module.exports = function(grunt) {
       'wiredep',<% if (includeHandlebars) {  %>
       'assemble:server',<% } %>
       'concurrent:server',
-      'autoprefixer',
+      'cssnext',
       'browserSync:livereload',
       'watch'
     ]);
@@ -511,7 +511,7 @@ module.exports = function(grunt) {
       grunt.task.run([
         'clean:server',
         'concurrent:test',
-        'autoprefixer'
+        'cssnext'
       ]);
     }
 
@@ -529,7 +529,7 @@ module.exports = function(grunt) {
     'assemble:dist',<% } %>
     'useminPrepare',
     'concurrent:dist',
-    'autoprefixer',
+    'cssnext',
     'concat',
     'cssmin',
     'uglify',
