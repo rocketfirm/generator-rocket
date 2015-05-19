@@ -277,7 +277,7 @@ module.exports = function(grunt) {
       options: {
         dest: '<%%= config.dist %>'
       },<% if (includeHandlebars) {  %>
-      html: '<%%= config.app %>/layouts/default.hbs'<% } else { %>
+      html: '<%%= config.app %>/_layouts/default.hbs'<% } else { %>
       html: '<%%= config.app %>/index.html'<% } %>
     },
 
