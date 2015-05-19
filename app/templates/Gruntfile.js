@@ -195,8 +195,7 @@ module.exports = function(grunt) {
       options: {
         sourceMap: true,
         includePaths: ['bower_components'<% if (includeSprites) { %>
-          , '<%%= config.tmp %>/styles'<% } %>],
-        imagePath: '../images'
+          , '<%%= config.tmp %>/styles'<% } %>]
       },
       dist: {
         files: [{
@@ -221,7 +220,8 @@ module.exports = function(grunt) {
     // Use tomorrow's CSS syntax, today
     cssnext: {
       options: {
-        browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1']
+        browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1'],
+        sourceMap: true,
       },
       dist: {
         files: [{
