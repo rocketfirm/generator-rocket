@@ -22,7 +22,7 @@
     "jquery",
     "grunt"
   ],
-   "dependencies": {
+  "dependencies": {
     "chalk": "^1.0.0",
     "cheerio": "^0.18.0",
     "yeoman-generator": "^0.18.9",
