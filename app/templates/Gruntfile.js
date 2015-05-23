@@ -36,7 +36,7 @@ module.exports = function(grunt) {
     watch: {<% if (includeHandlebars) { %>
       assemble: {
         files: ['<%%= config.app %>/{,*/}*.hbs'],
-        tasks: ['assemble:server']
+        tasks: ['newer:assemble:server']
       },<% } %>
       bower: {
         files: ['bower.json'],
@@ -83,8 +83,9 @@ module.exports = function(grunt) {
       },
       livereload: {
         options: {
-          files: [
-            '<%%= config.app %>/{,*/}*.html',
+          files: [<% if (includeHandlebars) { %>
+            '<%%= config.tmp %>/{,*/}*.html',<% } else { %>
+            '<%%= config.app %>/{,*/}*.html',<% } %>
             '<%%= config.tmp %>/styles/{,*/}*.css',
             '<%%= config.app %>/images/{,*/}*',
             '<%%= config.app %>/scripts/{,*/}*.js'
@@ -277,7 +278,7 @@ module.exports = function(grunt) {
       options: {
         dest: '<%%= config.dist %>'
       },<% if (includeHandlebars) {  %>
-      html: '<%%= config.app %>/_layouts/default.hbs'<% } else { %>
+      html: '<%%= config.tmp %>/index.html'<% } else { %>
       html: '<%%= config.app %>/index.html'<% } %>
     },
 
