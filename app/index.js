@@ -16,12 +16,12 @@ module.exports = yeoman.generators.Base.extend({
     });
     this.testFramework = this.options['test-framework'];
 
-    this.option('coffee', {
-      desc: 'Use CoffeeScript',
+    this.option('babel', {
+      desc: 'Use Babel',
       type: Boolean,
       defaults: false
     });
-    this.coffee = this.options.coffee;
+    this.babel = this.options.babel;
 
     this.pkg = require('../package.json');
   },
@@ -46,15 +46,15 @@ module.exports = yeoman.generators.Base.extend({
         name: 'Bootstrap',
         value: 'includeBootstrap',
         checked: true
-      },{
+      }, {
         name: 'Sass',
         value: 'includeSass',
         checked: false
-      },{
+      }, {
         name: 'Modernizr',
         value: 'includeModernizr',
         checked: false
-      },{
+      }, {
         name: 'Handlebars',
         value: 'includeHandlebars',
         checked: false
@@ -112,10 +112,10 @@ module.exports = yeoman.generators.Base.extend({
 
     if (this.includeBootstrap) {
       var bs = 'bootstrap' + (this.includeSass ? '-sass-official' : '');
-      bower.dependencies[bs] = "~3.3.3";
-      bower.dependencies.jquery = "~1.11.2";
+      bower.dependencies[bs] = "~3.3.4";
+      bower.dependencies.jquery = "~1.11.3";
     } else {
-      bower.dependencies.jquery = "~1.11.2";
+      bower.dependencies.jquery = "~1.11.3";
     }
 
     if (this.includeModernizr) {
@@ -188,6 +188,7 @@ module.exports = yeoman.generators.Base.extend({
     this.mkdir('app/styles');
     this.mkdir('app/images');
     this.write((this.includeHandlebars ? 'app/_layouts/default.hbs' : 'app/index.html'), this.indexFile);
+    this.copy('main.js', 'app/scripts/main.js');
 
     if (this.includeHandlebars) {
       this.mkdir('app/_includes');
@@ -197,12 +198,6 @@ module.exports = yeoman.generators.Base.extend({
     if (this.includeSprites) {
       this.copy('fork.png', 'app/images/icons/fork.png');
     }
-
-    if (this.coffee) {
-      this.copy('main.coffee', 'app/scripts/main.coffee');
-    } else {
-      this.copy('main.js', 'app/scripts/main.js');
-    }
   },
 
   install: function() {
@@ -211,7 +206,7 @@ module.exports = yeoman.generators.Base.extend({
         options: {
           'skip-message': this.options['skip-install-message'],
           'skip-install': this.options['skip-install'],
-          'coffee': this.options.coffee
+          'babel': this.options.babel
         }
       });
 
