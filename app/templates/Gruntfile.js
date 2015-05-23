@@ -41,7 +41,7 @@ module.exports = function(grunt) {
       bower: {
         files: ['bower.json'],
         tasks: ['wiredep']
-      },<% if (coffee) { %>
+      },<% if (babel) { %>
       coffee: {
         files: ['<%%= config.app %>/scripts/{,*/}*.{coffee,litcoffee,coffee.md}'],
         tasks: ['coffee:dist']
@@ -91,7 +91,7 @@ module.exports = function(grunt) {
           ],
           port: 9000,
           server: {
-            baseDir: ['<%%= config.tmp %>', config.app],
+            baseDir: [config.tmp, config.app],
             routes: {
               '/bower_components': './bower_components'
             }
@@ -105,7 +105,7 @@ module.exports = function(grunt) {
           logLevel: 'silent',
           host: 'localhost',
           server: {
-            baseDir: ['<%%= config.tmp %>', './test', config.app],
+            baseDir: [config.tmp, './test', config.app],
             routes: {
               '/bower_components': './bower_components'
             }
