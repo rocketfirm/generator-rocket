@@ -241,7 +241,7 @@ module.exports = function(grunt) {
     wiredep: {
       app: {<% if (includeHandlebars) { %>
         ignorePath: /^<%= config.app %>\/|\.\.\/\.\.\//,
-        src: ['<%%= config.app %>/layouts/default.hbs']<% } else { %>
+        src: ['<%%= config.app %>/_layouts/default.hbs']<% } else { %>
         ignorePath: /^<%= config.app %>\/|\.\.\//,
         src: ['<%%= config.app %>/index.html']<% } %><% if (includeBootstrap) { %>,<% if (includeSass) { %>
         exclude: [
