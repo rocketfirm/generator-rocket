@@ -36,7 +36,7 @@ module.exports = function(grunt) {
     watch: {<% if (includeHandlebars) { %>
       assemble: {
         files: ['<%%= config.app %>/{,*/}*.hbs'],
-        tasks: ['newer:assemble:server'],
+        tasks: ['assemble:server'],
       },<% } %>
       bower: {
         files: ['bower.json'],
@@ -63,11 +63,11 @@ module.exports = function(grunt) {
       },<% if (includeSass) { %>
       sass: {
         files: ['<%%= config.app %>/styles/{,*/}*.{scss,sass}'],
-        tasks: ['sass:server', 'cssnext'],
+        tasks: ['sass:server', 'postcss'],
       },<% } %>
       styles: {
         files: ['<%%= config.app %>/styles/{,*/}*.css'],
-        tasks: ['newer:copy:styles', 'cssnext'],
+        tasks: ['newer:copy:styles', 'postcss'],
       }<% if (includeSprites) { %>,
       icons: {
         files: ['<%= config.app %>/images/icons/{,*/}*.png'],
@@ -221,11 +221,16 @@ module.exports = function(grunt) {
       }
     },<% } %>
 
+    // Transforming CSS with JS plugins
     // Use tomorrow's CSS syntax, today
-    cssnext: {
+    postcss: {
       options: {
-        browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1'],
-        sourceMap: true,
+        map: true,
+        processors: [
+          require('cssnext')({
+            browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1']
+          }),
+        ]
       },
       dist: {
         files: [{
@@ -504,7 +509,7 @@ module.exports = function(grunt) {
       'wiredep',<% if (includeHandlebars) {  %>
       'assemble:server',<% } %>
       'concurrent:server',
-      'cssnext',
+      'postcss',
       'browserSync:livereload',
       'watch',
     ]);
@@ -515,7 +520,7 @@ module.exports = function(grunt) {
       grunt.task.run([
         'clean:server',
         'concurrent:test',
-        'cssnext',
+        'postcss',
       ]);
     }
 
@@ -533,7 +538,7 @@ module.exports = function(grunt) {
     'assemble:dist',<% } %>
     'useminPrepare',
     'concurrent:dist',
-    'cssnext',
+    'postcss',
     'concat',
     'cssmin',
     'uglify',

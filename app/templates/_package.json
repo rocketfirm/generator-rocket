@@ -3,6 +3,7 @@
   "devDependencies": {
     "apache-server-configs": "~2.7.1",<% if (includeHandlebars) { %>
     "assemble": "~0.4.42",<% } %>
+    "cssnext": "~1.7.1",
     "grunt": "~0.4.5",
     "grunt-concurrent": "~1.0.0",
     "grunt-browser-sync": "~2.1.1",
@@ -16,11 +17,11 @@
     "grunt-contrib-jshint": "~0.11.2",
     "grunt-contrib-uglify": "~0.9.1",
     "grunt-contrib-watch": "~0.6.1",<% if (babel) { %>
-    "grunt-babel": "~5.0.0",<% } %>
-    "grunt-cssnext": "~1.0.0",<% if (testFramework === 'mocha') { %>
+    "grunt-babel": "~5.0.0",<% } %><% if (testFramework === 'mocha') { %>
     "grunt-mocha": "~0.4.11",<% } %><% if (includeModernizr) { %>
     "grunt-modernizr": "~0.6.0",<% } %>
     "grunt-newer": "~1.1.0",
+    "grunt-postcss": "~0.5.2",
     "grunt-rev": "~0.1.0",<% if (includeSass) { %>
     "grunt-sass": "~1.0.0",<% } %><% if (includeSprites) { %>
     "grunt-spritesmith": "~4.6.0",<% } %>
