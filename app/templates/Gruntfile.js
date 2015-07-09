@@ -250,7 +250,7 @@ module.exports = function(grunt) {
         ignorePath: /^<%= config.app %>\/|\.\.\//,
         src: ['<%%= config.app %>/index.html']<% } %><% if (includeBootstrap) { %>,<% if (includeSass) { %>
         exclude: [
-          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js',
+          'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
           'bower_components/respond/dest/respond.src.js',
         ]<% } else { %>
         exclude: [
@@ -400,7 +400,7 @@ module.exports = function(grunt) {
               %>bower_components/bootstrap/dist<%
             } %>',
           src: '<% if (includeSass) {
-              %>bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*<%
+              %>bower_components/bootstrap-sass/assets/fonts/bootstrap/*<%
             } else {
               %>fonts/*<%
             } %>',

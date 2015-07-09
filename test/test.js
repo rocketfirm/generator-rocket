@@ -4,13 +4,13 @@ var helpers = require('yeoman-generator').test;
 var assert = require('yeoman-generator').assert;
 var _ = require('underscore');
 
-describe('Rocket generator', function () {
+describe('Rocket generator', function() {
   // not testing the actual run of generators yet
-  it('the generator can be required without throwing', function () {
+  it('the generator can be required without throwing', function() {
     this.app = require('../app');
   });
 
-  describe('run test', function () {
+  describe('run test', function() {
 
     var expectedContent = [
       ['bower.json', /"name": "tmp"/],
@@ -37,15 +37,15 @@ describe('Rocket generator', function () {
 
     var runGen;
 
-    beforeEach(function () {
+    beforeEach(function() {
       runGen = helpers
         .run(path.join(__dirname, '../app'))
         .inDir(path.join(__dirname, '.tmp'))
         .withGenerators([[helpers.createDummyGenerator(), 'mocha:app']]);
     });
 
-    it('creates expected files', function (done) {
-      runGen.withOptions(options).on('end', function () {
+    it('creates expected files', function(done) {
+      runGen.withOptions(options).on('end', function() {
 
         assert.file([].concat(
           expected,
@@ -70,17 +70,17 @@ describe('Rocket generator', function () {
           ['.gitignore', /\.sass-cache/],
           ['package.json', /grunt-contrib-sass/],
           ['package.json', /grunt-sass/],
-          ['Gruntfile.js', /bootstrap-sass-official/],
+          ['Gruntfile.js', /bootstrap-sass/],
           ['app/index.html', /Sass is a mature/],
-          ['bower.json', /bootstrap-sass-official/]
+          ['bower.json', /bootstrap-sass/]
         ]);
         done();
       });
     });
 
-    it('creates expected modernizr components', function (done) {
+    it('creates expected modernizr components', function(done) {
       runGen.withOptions(options).withPrompt({features: ['includeModernizr']})
-      .on('end', function () {
+      .on('end', function() {
 
         assert.fileContent([
           ['Gruntfile.js', /modernizr/],
@@ -93,9 +93,9 @@ describe('Rocket generator', function () {
       });
     });
 
-    it('creates expected bootstrap components', function (done) {
+    it('creates expected bootstrap components', function(done) {
       runGen.withOptions(options).withPrompt({features: ['includeBootstrap']})
-      .on('end', function () {
+      .on('end', function() {
 
         assert.fileContent([
           ['Gruntfile.js', /bootstrap/],
@@ -107,32 +107,32 @@ describe('Rocket generator', function () {
       });
     });
 
-    it('creates expected Sass files', function (done) {
+    it('creates expected Sass files', function(done) {
       runGen.withOptions(options).withPrompt({
         features: ['includeSass']
-      }).on('end', function () {
+      }).on('end', function() {
 
         assert.fileContent([
           ['package.json', /grunt-sass/]
         ]);
 
         assert.noFileContent([
-          ['Gruntfile.js', /bootstrap-sass-official/]
+          ['Gruntfile.js', /bootstrap-sass/]
         ]);
 
         done();
       });
     });
 
-    it('creates expected SASS and Bootstrap components', function (done) {
+    it('creates expected SASS and Bootstrap components', function(done) {
       runGen.withOptions(options).withPrompt({
         features: ['includeSass', 'includeBootstrap']
-      }).on('end', function () {
+      }).on('end', function() {
 
         assert.fileContent([
-          ['Gruntfile.js', /bootstrap-sass-official/],
+          ['Gruntfile.js', /bootstrap-sass/],
           ['app/index.html', /Sass is a mature/],
-          ['bower.json', /bootstrap-sass-official/]
+          ['bower.json', /bootstrap-sass/]
         ]);
 
         done();
