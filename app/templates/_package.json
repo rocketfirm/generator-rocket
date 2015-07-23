@@ -1,7 +1,6 @@
 {
   "private": true,
-  "devDependencies": {
-    "apache-server-configs": "~2.14.0",<% if (includeHandlebars) { %>
+  "devDependencies": {<% if (includeHandlebars) { %>
     "assemble": "~0.4.42",<% } %>
     "cssnext": "~1.8.1",
     "grunt": "~0.4.5",
