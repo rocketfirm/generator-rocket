@@ -35,8 +35,8 @@ module.exports = function(grunt) {
     // Watches files for changes and runs tasks based on the changed files
     watch: {<% if (includeHandlebars) { %>
       assemble: {
-        files: ['<%%= config.app %>/{,*/}*.hbs'],
-        tasks: ['assemble:server'],
+        files: ['<%%= config.app %>/views/{,*/}*.hbs'],
+        tasks: ['assemble'],
       },<% } %>
       bower: {
         files: ['bower.json'],
@@ -63,15 +63,15 @@ module.exports = function(grunt) {
       },<% if (includeSass) { %>
       sass: {
         files: ['<%%= config.app %>/styles/{,*/}*.{scss,sass}'],
-        tasks: ['sass:server', 'postcss'],
+        tasks: ['sass', 'postcss'],
       },<% } %>
       styles: {
         files: ['<%%= config.app %>/styles/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'postcss'],
       }<% if (includeSprites) { %>,
       icons: {
-        files: ['<%= config.app %>/images/icons/{,*/}*.png'],
-        tasks: ['sprite:server', 'sass:server'],
+        files: ['<%%= config.app %>/images/icons/{,*/}*.png'],
+        tasks: ['sprite:server', 'sass'],
       }<% } %>
     },
 
@@ -209,15 +209,6 @@ module.exports = function(grunt) {
           dest: '<%%= config.tmp %>/styles',
           ext: '.css',
         }]
-      },
-      server: {
-        files: [{
-          expand: true,
-          cwd: '<%%= config.app %>/styles',
-          src: ['*.{scss,sass}'],
-          dest: '<%%= config.tmp %>/styles',
-          ext: '.css',
-        }]
       }
     },<% } %>
 
@@ -311,7 +302,12 @@ module.exports = function(grunt) {
           cwd: '<%%= config.app %>/images',
           src: '{,*/}*.{gif,jpeg,jpg,png}',
           dest: '<%%= config.dist %>/images',
-        }]
+        }<% } %><% if (includeSprites) { %>, {
+          expand: true,
+          cwd: '<%%= config.tmp %>/images',
+          src: '{,*/}*.{gif,jpeg,jpg,png}',
+          dest: '<%%= config.dist %>/images',
+        }<% } %>]
       }
     },
 
@@ -439,7 +435,7 @@ module.exports = function(grunt) {
     // Run some tasks in parallel to speed up build process
     concurrent: {
       server: [<% if (includeSass) { %>
-        'sass:server',<% } if (babel) {  %>
+        'sass',<% } if (babel) {  %>
         'babel:dist',<% } %>
         'copy:styles',
       ],
@@ -460,32 +456,20 @@ module.exports = function(grunt) {
     assemble: {
       options: {
         flatten: true,
-        partials: ['<%%= config.app %>/_includes/**/*.hbs'],
-        layout: ['<%%= config.app %>/_layouts/default.hbs'],
-      },
-      server: {
-        src: ['<%%= config.app %>/*.hbs'],
-        dest: '<%%= config.tmp %>/',
+        partials: ['<%%= config.app %>/views/_includes/**/*.hbs'],
+        layout: ['<%%= config.app %>/views/_layouts/default.hbs'],
       },
       dist: {
-        src: ['<%%= config.app %>/*.hbs'],
+        src: ['<%%= config.app %>/views/*.hbs'],
         dest: '<%%= config.tmp %>/',
       }
     },<% } %><% if (includeSprites) { %>
 
     // Create css sprites
     sprite: {
-      server: {
-        src: '<%%= config.app %>/images/icons/*.png',
-        dest: '<%%= config.tmp %>/images/generated/sprites.png',
-        destCss: '<%%= config.tmp %>/styles/_sprites.scss',
-        cssVarMap: function(sprite) {
-          sprite.name = 'icon-' + sprite.name;
-        }
-      },
       dist: {
         src: '<%%= config.app %>/images/icons/*.png',
-        dest: '<%%= config.dist %>/images/generated/sprites.png',
+        dest: '<%%= config.tmp %>/images/generated/sprites.png',
         destCss: '<%%= config.tmp %>/styles/sprites.scss',
         imgPath: '../images/generated/sprites.png',
         cssVarMap: function(sprite) {
@@ -504,7 +488,7 @@ module.exports = function(grunt) {
       'clean:server',<% if (includeSprites) {  %>
       'sprite:server',<% } %>
       'wiredep',<% if (includeHandlebars) {  %>
-      'assemble:server',<% } %>
+      'assemble',<% } %>
       'concurrent:server',
       'postcss',
       'browserSync:livereload',
