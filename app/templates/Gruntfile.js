@@ -463,7 +463,7 @@ module.exports = function(grunt) {
         src: ['<%%= config.app %>/views/*.hbs'],
         dest: '<%%= config.tmp %>/',
       }
-    },<% } %><% if (includeSprites) { %>
+    }<% } %><% if (includeSprites) { %>,
 
     // Create css sprites
     sprite: {
