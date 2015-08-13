@@ -1,5 +1,4 @@
-# generator-rocket [![Build Status](https://secure.travis-ci.org/rocketfirm/generator-rocket.png?branch=master)](https://travis-ci.org/rocketfirm/generator-rocket)
-
+# generator-rocket [![Build Status](https://secure.travis-ci.org/rocketfirm/generator-rocket.png?branch=master)](https://travis-ci.org/rocketfirm/generator-rocket) [![Coverage Status](https://coveralls.io/repos/rocketfirm/generator-rocket/badge.svg?branch=master&service=github)](https://coveralls.io/github/rocketfirm/generator-rocket?branch=master)
 > [Yeoman](http://yeoman.io) generator
 
 
