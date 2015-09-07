@@ -1,13 +1,15 @@
-<% if (includeBootstrap) { %>$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+<% if (includeBootstrap) { -%>
+$icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
+
 // bower:scss
-@import "bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
+@import "bootstrap-sass/assets/stylesheets/bootstrap.scss";
 // endbower
 
 .browsehappy {
   margin: 0.2em 0;
-  padding: 0.2em 0;
   background: #ccc;
   color: #000;
+  padding: 0.2em 0;
 }
 
 /* Space out content a bit */
@@ -50,11 +52,11 @@ body {
 
 /* Main marketing message and sign up button */
 .jumbotron {
-  border-bottom: 1px solid #e5e5e5;
   text-align: center;
+  border-bottom: 1px solid #e5e5e5;
   .btn {
-    padding: 14px 24px;
     font-size: 21px;
+    padding: 14px 24px;
   }
 }
 
@@ -89,48 +91,37 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
-}<% } else { %>
+}
+<% } else { -%>
 // bower:scss
 // endbower
 
 body {
   background: #fafafa;
-  color: #333;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333;
 }
 
 .hero-unit {
-  width: 300px;
   margin: 50px auto 0 auto;
-  padding: 60px;
-  background-color: #eee;
-  border-radius: 6px;
+  width: 300px;
   font-size: 18px;
   font-weight: 200;
   line-height: 30px;
-
+  background-color: #eee;
+  border-radius: 6px;
+  padding: 60px;
   h1 {
     font-size: 60px;
-    letter-spacing: -1px;
     line-height: 1;
+    letter-spacing: -1px;
   }
 }
 
 .browsehappy {
   margin: 0.2em 0;
-  padding: 0.2em 0;
   background: #ccc;
   color: #000;
-}<% } %><% if (includeSass && includeSprites) { %>
-
-@import "sprites";
-
-.icon {
-  display: inline-block;
-  background-repeat: no-repeat;
-  line-height: 1;
-  vertical-align: middle;
+  padding: 0.2em 0;
 }
-
-@include sprites($spritesheet-sprites);
-<% } %>
+<% } -%>
