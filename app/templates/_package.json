@@ -20,7 +20,7 @@
     "grunt-mocha": "^0.4.11",<% } %><% if (includeModernizr) { %>
     "grunt-modernizr": "^0.6.0",<% } %>
     "grunt-newer": "^1.1.0",
-    "grunt-postcss": "^0.5.2",
+    "grunt-postcss": "^0.6.0",
     "grunt-rev": "^0.1.0",<% if (includeSass) { %>
     "grunt-sass": "^1.0.0",<% } %><% if (includeSprites) { %>
     "grunt-spritesmith": "^4.6.0",<% } %>

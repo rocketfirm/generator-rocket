@@ -72,12 +72,15 @@ module.exports = function (grunt) {
     browserSync: {
       options: {
         notify: false,
-        background: true
+        background: true,
+        watchOptions: {
+          ignored: ''
+        }
       },
       livereload: {
         options: {
           files: [<% if (includeHandlebars) { %>
-            '<%%= config.tmp %>/{,*/}*.html',<% } else { %>
+            '.tmp/{,*/}*.html',<% } else { %>
             '<%%= config.app %>/{,*/}*.html',<% } %>
             '.tmp/styles/{,*/}*.css',
             '<%%= config.app %>/images/{,*/}*',<% if (useBabel) { %>
@@ -274,7 +277,7 @@ module.exports = function (grunt) {
       options: {
         dest: '<%%= config.dist %>'
       },<% if (includeHandlebars) { %>
-      html: '<%%= config.tmp %>/index.html'<% } else { %>
+      html: '.tmp/index.html'<% } else { %>
       html: '<%%= config.app %>/index.html'<% } %>
     },
 
@@ -375,7 +378,7 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             'images/{,*/}*.webp',
             '{,*/}*.html',
-            'styles/fonts/{,*/}*.*'
+            'fonts/{,*/}*.*'
           ]
         }<% if (includeBootstrap) { %>, {
           expand: true,
