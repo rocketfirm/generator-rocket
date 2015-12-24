@@ -15,11 +15,11 @@ module.exports = function (grunt) {
 
   // Automatically load required grunt tasks
   require('jit-grunt')(grunt, {
-    useminPrepare: 'grunt-usemin'
+    useminPrepare: 'grunt-usemin',
   });
 
   // Configurable paths
-  var config = {
+  const config = {
     app: 'app',
     dist: 'dist'
   };
@@ -28,7 +28,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
 
     // Project settings
-    config: config,
+    config,
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {<% if (includeHandlebars) { %>
@@ -180,6 +180,7 @@ module.exports = function (grunt) {
     // Compiles ES6 with Babel
     babel: {
       options: {
+        presets: ['es2015'],
         sourceMap: true
       },
       dist: {
